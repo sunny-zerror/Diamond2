@@ -1,31 +1,75 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/models/model.gltf')
-  console.log(nodes, materials);
+export default function Model(props) {
+  const { nodes, materials } = useGLTF('/models/doji_diamond_ring.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.object_1.geometry} material={nodes.object_1.material} />
-      <mesh geometry={nodes.object_2.geometry} material={nodes.object_2.material} />
-      <mesh geometry={nodes.object_3.geometry} material={nodes.object_3.material} />
-      <mesh geometry={nodes.object_4.geometry} material={nodes.object_4.material} />
-      <mesh geometry={nodes.object_5.geometry} material={nodes.object_5.material} />
-      <mesh geometry={nodes.object_6.geometry} material={nodes.object_6.material} />
-      <mesh geometry={nodes.object_7.geometry} material={nodes.object_7.material} />
-      <mesh geometry={nodes.object_8.geometry} material={nodes.object_8.material} />
-      <mesh geometry={nodes.object_9.geometry} material={nodes.object_9.material} />
-      <mesh geometry={nodes.object_10.geometry} material={nodes.object_10.material} />
-      <mesh geometry={nodes.object_11.geometry} material={nodes.object_11.material} />
-      <mesh geometry={nodes.object_12.geometry} material={nodes.object_12.material} />
-      <mesh geometry={nodes.Emerald.geometry} material={nodes.Emerald.material} />
-      <mesh geometry={nodes.object_13.geometry} material={nodes.object_13.material} />
-      <mesh geometry={nodes.object_14.geometry} material={nodes.object_14.material} />
-      <mesh geometry={nodes.object_15.geometry} material={nodes.object_15.material} />
-      <mesh geometry={nodes.object_16.geometry} material={nodes.object_16.material} />
-      <mesh geometry={nodes.object_17.geometry} material={nodes.object_17.material} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_4.geometry}
+        material={materials.White_Gold}
+        position={[0, 0, 0.000688]}
+        scale={[1.015752, 0.865324, 1.019256]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_6.geometry}
+        material={materials.material_0}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_8.geometry}
+        material={materials.White_Gold}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_9.geometry}
+        material={materials.White_Gold_2}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_11.geometry}
+        material={materials.Material_2}
+        position={[0.000056, 0.000191, 0.10281]}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={0.414152}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_13.geometry}
+        material={materials.Material_2}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_15.geometry}
+        material={materials.Material_2}
+        position={[0.036322, -0.000439, -0.070929]}
+        rotation={[0.125017, 0.941536, 0.329243]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_17.geometry}
+        material={materials.White_Gold}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={0.01}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_19.geometry}
+        material={materials.material_0}
+      />
     </group>
   )
 }
 
-useGLTF.preload('/models/model.gltf')
+useGLTF.preload('/models/doji_diamond_ring.glb')

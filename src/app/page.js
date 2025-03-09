@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/all";
 import "lenis/dist/lenis.css";
 import Lenis from "lenis";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import {
   RiArrowDropUpLine,
   RiFacebookBoxFill,
@@ -13,8 +14,9 @@ import {
   RiTwitterFill,
 } from "@remixicon/react";
 import Headroom from "react-headroom";
-import Scene from "./components/Scene";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const Scene = dynamic(() => import("./components/Scene.jsx"), { ssr: false });
 
 const hero_video = [
   "/videos/hero_card_vid_2.MP4",
@@ -26,7 +28,7 @@ const cardData = [
   {
     id: 1,
     bgColor: "",
-    img: "/images/collection/cln_1.png",
+    img: "/images/collection/cln_1.webp",
     width: "w-[15vw]",
     txtHeading: " CEREMONY & ENGAGEMENT COLLECTION",
     txtPara: "“A work of exquisite beauty, the Diamond2® solitaire seduces the heart with its captivating brilliance and fire.”",
@@ -37,7 +39,7 @@ const cardData = [
   {
     id: 2,
     bgColor: "",
-    img: "/images/collection/cln_5.png",
+    img: "/images/collection/cln_5.webp",
     width: "w-[15vw]",
     responsive_width: "w-[45vw]",
     txtHeading: " INTERSTELLAR COLLECTION",
@@ -49,7 +51,7 @@ const cardData = [
   {
     id: 3,
     bgColor: "",
-    img: "/images/collection/cln_2.png",
+    img: "/images/collection/cln_2.webp",
     width: "w-[25.7vw]",
     txtHeading: "Riviera collection",
     txtPara: "“Delicate petals and imaginative settings seduce the eye and warm the heart.”",
@@ -60,7 +62,7 @@ const cardData = [
   {
     id: 4,
     bgColor: "",
-    img: "/images/collection/cln_6.png",
+    img: "/images/collection/cln_6.webp",
     width: "w-[15vw]",
     txtHeading: "Lab-Grown Emerald collection",
     txtPara: "“At Diamond2®, we offer an impressive selection of stone cuts to allow clients the opportunity.”",
@@ -71,7 +73,7 @@ const cardData = [
   {
     id: 5,
     bgColor: "",
-    img: "/images/collection/cln_4.png",
+    img: "/images/collection/cln_4.webp",
     width: "w-[15vw]",
     txtHeading: "High Jewellery collection",
     txtPara: "“At Diamond2®, we also offer a selection of high jewellery pieces that are designed to captivate and inspire.”",
@@ -333,9 +335,9 @@ export default function Home() {
       <div className="  scroll_parent_section_1  w-full h-screen  lg:h-[130vh] ">
         <div className=" scroll_child_section_1 w-full h-full flex flex-col lg:flex-row bg-white    p-5 py-10 lg:p-20 ">
           <div className=" w-full lg:w-[50%] h-full center">
-            <div className=" w-full h-[50%]  md:w-[80%] md:h-[80%] bg-blue-100">
+            <div className=" w-full h-[50%] center  md:w-[80%] md:h-[80%] ">
               <Suspense fallback={null}>
-              <Scene />
+                <Scene />
               </Suspense>
             </div>
           </div>
@@ -347,7 +349,7 @@ export default function Home() {
                 A world beyond
               </span> <br />   mined diamonds
             </p>
-            <p className=" w-full  text-sm  lg:w-[70%] leading-5  lg:text-xl ">
+            <p className=" w-full  text-sm  lg:w-[70%] leading-5  lg:text-xl  mb-20 md:mb-0">
               Our revolutionary lab-grown Diamond2<sup>®</sup> is an innovative
               breakthrough that seeks to disrupt the tradition-bound world of fine
               jewellery dominated by the mined diamonds. <br /><br />
@@ -364,7 +366,7 @@ export default function Home() {
       </div>
       <div className="scroll_parent_section_2   w-full h-[70vh] bg-transparent"></div>
       <div className=" scroll_parent_section_1 overflow-hidden  w-full ">
-        <div className=" max-[600px]:hidden overflow-hidden scroll_child_section_1 w-full h-full flex flex-col items-center justify-between bg-white  pt-20 pb-32 ">
+        <div className=" max-[600px]:hidden overflow-hidden scroll_child_section_1 w-full h-full flex flex-col items-center justify-between bg-white  pt-20 pb-32 md:py-44 ">
           <div className="  our_cln_heading   overflow-hidden  w-full h-[15vw]  flex justify-start items-center flex-col">
             <div className="h-fit w-full flex overflow-hidden items-center justify-center  flex-col">
               <div className="our_cln_heading_2 bg text-center">
@@ -456,7 +458,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className=" scroll_parent_section_2 w-full h-[50vh] bg-transparent"></div>
+      <div className=" scroll_parent_section_2 w-full h-[70vh] bg-transparent"></div>
 
       <div className=" scroll_parent_section_1 w-full  lg:h-[140vh]  ">
         <div className=" scroll_child_section_1 w-full h-full flex flex-col lg:flex-row bg-white p-5   lg:p-20 lg:py-32 ">
@@ -483,7 +485,7 @@ export default function Home() {
 
               <img
                 className="w-[50%] mt-10"
-                src="/images/blogs/blog_cvr_1.png"
+                src="/images/blogs/blog_cvr_1.webp"
                 alt=""
               />
               <div className="flex mt-2 flex-col">
@@ -498,7 +500,7 @@ export default function Home() {
 
               <img
                 className="w-[70%]"
-                src="/images/blogs/blog_cvr_2.png"
+                src="/images/blogs/blog_cvr_2.webp"
                 alt=""
               /><div className="flex mt-2 items-start flex-col">
 
@@ -515,10 +517,10 @@ export default function Home() {
         <div className="">
 
 
-          <p className="text-center text-6xl capitalize  ">The Diamond2 <span className="text-[#6d1d45]"> Stores</span></p>
+          <p className="text-center text-3xl md:text-6xl capitalize  ">The Diamond2 <span className="text-[#6d1d45]"> Stores</span></p>
           <div className="w-full flex  flex-col md:flex-row my-20 ">
             <div className=" w-full md:w-[50%] ">
-              <img className="h-full w-full object-cover" src="/images/stores/store_1.png" alt="" />
+              <img className="h-full w-full object-cover" src="/images/stores/store_1.webp" alt="" />
             </div>
             <div className=" w-full md:w-[50%] mt-5 md:mt-0 md:p-10 montserrat ">
               <div className="flex w-full justify-evenly">

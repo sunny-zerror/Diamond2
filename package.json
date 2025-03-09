@@ -12,17 +12,17 @@
     "@gsap/react": "^2.1.2",
     "@react-three/drei": "^9.108.4",
     "@react-three/fiber": "^8.16.8",
-    "three": "^0.162.0",
     "@remixicon/react": "^4.6.0",
     "@tailwindcss/postcss": "^4.0.11",
     "gsap": "^3.12.7",
     "lenis": "^1.2.1",
-    "next": "15.2.1",
+    "next": "^14.2.24",
     "postcss": "^8.5.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-headroom": "^3.2.1",
     "remixicon": "^4.6.0",
-    "tailwindcss": "^4.0.11"
+    "tailwindcss": "^4.0.11",
+    "three": "^0.162.0"
   }
 }
