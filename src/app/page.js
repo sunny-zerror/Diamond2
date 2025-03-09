@@ -16,16 +16,19 @@ import Headroom from "react-headroom";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const hero_video = [
-  "/videos/hero video.mp4",
-  "https://365ayearof.cartier.com/images/compressedImages/landing-fullscreen_02-opt-1920.WEBP",
-  "https://365ayearof.cartier.com/images/compressedImages/landing-fullscreen_01-opt-1920.WEBP",
+  "/videos/hero_card_vid_2.MP4",
+  "/images/bg_scroll_img_5_compressed.webp",
+  "/images/bg_scroll_img_1_compressed.webp",
+  "/images/bg_scroll_img_3_compressed.webp",
 ]
 const cardData = [
   {
     id: 1,
     bgColor: "",
-    img: "https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP",
+    img: "/images/collection/cln_1.png",
     width: "w-[15vw]",
+    txtHeading: " CEREMONY & ENGAGEMENT COLLECTION",
+    txtPara: "“A work of exquisite beauty, the Diamond2® solitaire seduces the heart with its captivating brilliance and fire.”",
     responsive_width: "w-[45vw]",
     textSize: "text-[1.5vw]",
     textSizePara: "text-[.7vw]",
@@ -33,9 +36,11 @@ const cardData = [
   {
     id: 2,
     bgColor: "",
-    img: "https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP",
+    img: "/images/collection/cln_5.png",
     width: "w-[15vw]",
     responsive_width: "w-[45vw]",
+    txtHeading: " INTERSTELLAR COLLECTION",
+    txtPara: "“Celestial bodies are captured in miniature through an exceptionalrange of pieces evoking striking constellations.”",
     textSize: "text-[1.5vw]",
     textSizePara: "text-[.7vw]",
     justifyContent: "justify-end",
@@ -43,8 +48,10 @@ const cardData = [
   {
     id: 3,
     bgColor: "",
-    img: "https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP",
-    width: "w-[27vw]",
+    img: "/images/collection/cln_2.png",
+    width: "w-[25.7vw]",
+    txtHeading: "Riviera collection",
+    txtPara: "“Delicate petals and imaginative settings seduce the eye and warm the heart.”",
     textSize: "text-[2.5vw]",
     responsive_width: "w-[95vw]",
     textSizePara: "text-[1vw]",
@@ -52,8 +59,10 @@ const cardData = [
   {
     id: 4,
     bgColor: "",
-    img: "https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP",
+    img: "/images/collection/cln_6.png",
     width: "w-[15vw]",
+    txtHeading: "Lab-Grown Emerald collection",
+    txtPara: "“At Diamond2®, we offer an impressive selection of stone cuts to allow clients the opportunity.”",
     responsive_width: "w-[45vw]",
     textSize: "text-[1.5vw]",
     textSizePara: "text-[.7vw]",
@@ -61,8 +70,10 @@ const cardData = [
   {
     id: 5,
     bgColor: "",
-    img: "https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP",
+    img: "/images/collection/cln_4.png",
     width: "w-[15vw]",
+    txtHeading: "High Jewellery collection",
+    txtPara: "“At Diamond2®, we also offer a selection of high jewellery pieces that are designed to captivate and inspire.”",
     responsive_width: "w-[45vw]",
     textSize: "text-[1.5vw]",
     textSizePara: "text-[.7vw]",
@@ -83,7 +94,27 @@ const scrollToTop = () => {
 export default function Home() {
   const [videoIndex, setVideoIndex] = useState(0);
 
+  const [logoSrc, setLogoSrc] = useState("/images/logo_text.png");
+  const [logoWidth, setLogoWidth] = useState("w-[30%] lg:w-[14%]");
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      if (scrollPosition > windowHeight * 0.2) {
+        setLogoSrc("/images/logo.png");
+        setLogoWidth("w-[7%] lg:w-[2%]"); // Customize the width here
+      } else {
+        setLogoSrc("/images/logo_text.png");
+        setLogoWidth("w-[30%] lg:w-[10%]");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -175,7 +206,7 @@ export default function Home() {
       if (targetCards.length > 0) {
         gsap.fromTo(
           targetCards,
-          { y: "-42.5%" },
+          { y: "-45%" },
           {
             y: 0,
             scrollTrigger: {
@@ -207,6 +238,23 @@ export default function Home() {
       gsap.set(".scroll_child_section_1", { scale: 0.8 });
     });
 
+
+
+    gsap.fromTo(
+      ".ftr_img",
+      { y: "-50%" },
+      {
+        y: 0, 
+        scrollTrigger: {
+          trigger: ".ftr",
+          // markers:true,
+          start: "top 72%", // Start a bit earlier
+          end: "bottom bottom", // End later for a smoother transition
+          scrub: true, // Slower reaction to scrolling
+        },
+      }
+    );
+
     return () => {
       triggers.forEach((trigger) => trigger.kill());
     };
@@ -226,16 +274,15 @@ export default function Home() {
 
 
   return (
-    <div suppressHydrationWarning>
-      <Headroom>
-        <div className="nav text-white  justify-between w-full flex items-center px-5 lg:px-10 xl:px-14   h-20 xl:h-32  z-[10]">
-          <img className=" w-[30%] lg:w-[10%] cursor-pointer  " src="/images/logo.png" alt="" />
-          <p className="text-2xl ">menu</p>
+    <div suppressHydrationWarning className=" spectral-regular">
+        <Headroom>
+        <div className="nav text-white p-5 w-full center z-[10]">
+          <img className={`${logoWidth} cursor-pointer`} src={logoSrc} alt="Logo" />
         </div>
-
       </Headroom>
       <div className="bg-hero-page w-full fixed z-[-1] top-0 left-0 h-screen bg-black">
-        {hero_video[videoIndex].endsWith(".mp4") ? (
+        <div className="overlay fixed top-0 left-0 w-full h-full bg-[#00000034]"></div>
+        {hero_video[videoIndex].endsWith(".MP4") ? (
           <video
             className="w-full h-full object-cover"
             loop
@@ -250,50 +297,57 @@ export default function Home() {
             alt="Hero Background"
           />
         )}
-      </div>;
-
-      <div className="w-full h-screen lg:h-[60vh] center ">
-        <p className="text-white text-8xl">Hero Headline</p>
       </div>
-      <div className="  scroll_parent_section_1  w-full  lg:h-[130vh] ">
+
+      <div className="w-full   uppercase spectral-extralight h-screen  lg:h-[70vh]  text-white py-20 md:py-0   flex flex-col  justify-end items-end md:px-[20vw] lg:px-[23vw] ">
+        <div className="w-full text-4xl lg:text-8xl  overflow-hidden italic   ">
+          <p >
+            Love more
+          </p>
+        </div>
+        <div className="w-full flex  items-center justify-end text-4xl lg:text-8xl overflow-hidden">
+          <p >
+            spend less
+          </p>
+        </div>
+      </div>
+      <div className="  scroll_parent_section_1  w-full h-screen  lg:h-[130vh] ">
         <div className=" scroll_child_section_1 w-full h-full flex flex-col lg:flex-row bg-white    p-5 py-10 lg:p-20 ">
-          <div className=" w-full lg:w-[50%] h-full flex items-center justify-center ">
-            <img
-              className="h-full w-fit object-cover"
-              src="https://365ayearof.cartier.com/images/chapter-1/article-2/compressedImages/Article-Header-opt-600.WEBP"
-              alt=""
-            />
+          <div className=" w-full lg:w-[50%] h-full center">
+            <div className=" w-full h-[50%]  md:w-[80%] md:h-[80%] bg-blue-100"></div>
           </div>
-          <div className=" w-full  lg:w-[50%] h-full  flex flex-col gap-10 items-center justify-center text-center">
-            <p className="capitalize text-5xl  ">
+          <div className=" w-full h-[50%]   lg:w-[50%] spectral-light md:h-full  flex flex-col gap-10 items-center justify-center text-center">
+            <p className="capitalize text-2xl md:text-4xl  ">
               {" "}
-              <span className="text-purple-500 italic ">
+              <span className="text-[#6d1d45] italic text-4xl md:text-6xl   ">
                 {" "}
-                What is
-              </span> <br /> diamond 2
+                A world beyond
+              </span> <br />   mined diamonds
             </p>
-            <p className=" w-full text-lg  lg:w-[80%] leading-5  lg:text-xl ">
-              Diamond2's origins lie in innovative technology and advance
-              science. Each Diamond2 lab-grown diamond shares identical optical,
-              chemical, and physical characteristics with mined diamonds,
-              meticulously produced in a laboratory setting by application of
-              science that borders to alchemy!
-              <br />
-              <br /> The result is a colourless (D, E, F) to near colourless (G,
-              H, I) lab-grown diamond designed to appeal to the modern consumer
-              and jeweller.
+            <p className=" w-full  text-sm  lg:w-[70%] leading-5  lg:text-xl ">
+              Our revolutionary lab-grown Diamond2<sup>®</sup> is an innovative
+              breakthrough that seeks to disrupt the tradition-bound world of fine
+              jewellery dominated by the mined diamonds. <br /><br />
+              Our unique, lab-grown diamonds are designed to seduce today’s
+              sophisticated, forward-looking clientele, thanks to its rarefied beauty
+              and remarkable brilliance that equals that of mined diamonds but at
+              significantly lesser cost.
+              <br /><br />
+
+              Discover the beauty of Diamond2<sup>®</sup> . <br />Discover a world beyond mined diamonds.
             </p>
           </div>
         </div>
       </div>
-      <div className="scroll_parent_section_2 w-full h-[70vh] bg-transparent"></div>
-      <div className=" scroll_parent_section_1  w-full ">
-        <div className=" max-[600px]:hidden scroll_child_section_1 w-full h-full flex flex-col items-center justify-between bg-white  pt-20 pb-32 ">
+      <div className="scroll_parent_section_2   w-full h-[70vh] bg-transparent"></div>
+      <div className=" scroll_parent_section_1 overflow-hidden  w-full ">
+        <div className=" max-[600px]:hidden overflow-hidden scroll_child_section_1 w-full h-full flex flex-col items-center justify-between bg-white  pt-20 pb-32 ">
           <div className="  our_cln_heading   overflow-hidden  w-full h-[15vw]  flex justify-start items-center flex-col">
             <div className="h-fit w-full flex overflow-hidden items-center justify-center  flex-col">
               <div className="our_cln_heading_2 bg text-center">
-                <p className="text-7xl  ">our collection </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, optio.</p>
+                <p className="text-7xl spectral-extralight-italic capitalize  "> jewellery collection</p>
+                <p className="mt-3 text-xl opacity-70">Diamond2® reimagines the world of fine jewellery with timeless <br />
+                  contemporary designs featuring our revolutionary lab-grown diamond.</p>
               </div>
             </div>
           </div>
@@ -312,18 +366,17 @@ export default function Home() {
                       alt=""
                     />
                     <div className="card_popup absolute  w-[90%] h-[90%] scale-0 bg-white z-[1] flex items-center justify-evenly   text-center flex-col">
-                      <div className="popup-text">
-
-                        <p className={`   ${card.textSize}`}>
-                          About collection
+                      <div className="popup-text uppercase center">
+                        <p className={`  leading-tight w-[80%] text-center  ${card.textSize}`}>
+                          {card.txtHeading}
                         </p>
                       </div>
                       <div className="popup-text-2 w-[80%] leading-[1vw]  ">
-                        <p className={`  ${card.textSizePara}`}>Lorem ipsum dolor sit amet <br /> consectetur adipisicing elit. Tempora commodi at aperiam voluptates ducimus, facilis magni repellat sunt minus assumenda!</p>
+                        <p className={`  ${card.textSizePara}`}>{card.txtPara}</p>
                       </div>
                     </div>
                   </div>
-                  <p className="text-xl font-semibold">Collection1</p>
+                  <p className="text-sm montserrat uppercase  leading-3 mt-2 ">{card.txtHeading}</p>
                 </div>
               </div>
             ))}
@@ -333,8 +386,9 @@ export default function Home() {
           <div className="overflow-hidden  w-full   ">
             <div className="h-fit  w-full flex overflow-hidden items-center justify-center  flex-col">
               <div className=" bg text-center">
-                <p className="text-5xl m-6 ">our collection </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, optio.</p>
+                <p className="text-3xl m-2 spectral-extralight-italic capitalize  "> jewellery collection</p>
+                <p className="mt-3 text-xs text-center px-10 opacity-70">Diamond2® reimagines the world of fine jewellery with timeless
+                  contemporary designs featuring our revolutionary lab-grown diamond.</p>
               </div>
             </div>
           </div>
@@ -356,20 +410,19 @@ export default function Home() {
                 }}
               >
                 <div className="w-full h-fit">
-                  <div className="relative flex items-center justify-center w-full h-fit">
+                  <div className=" relative flex items-center justify-center w-full h-fit">
                     <img className="w-full object-cover h-fit" src={card.img} alt="" />
                     <div className="card_popup absolute w-[90%] h-[90%] scale-0 bg-white z-[1] flex items-center justify-evenly text-center flex-col">
                       <div className="popup-text">
-                        <p className={` ${card.textSize}`}>About collection</p>
+                        <p className={` ${card.textSize}`}>      {card.txtHeading}</p>
                       </div>
                       <div className="popup-text-2 w-[80%] leading-[1vw]">
-                        <p className={` ${card.textSizePara}`}>
-                          Lorem ipsum dolor sit amet <br /> consectetur adipisicing elit.
+                        <p className={` ${card.textSizePara}`}>{card.txtPara}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm font-semibold">Collection1</p>
+                  <p className="text-sm uppercase ">   {card.txtHeading}</p>
                 </div>
               </div>
             ))}
@@ -382,74 +435,137 @@ export default function Home() {
 
       <div className=" scroll_parent_section_2 w-full h-[70vh] bg-transparent"></div>
 
-      <div className=" scroll_parent_section_1 w-full lg:h-[120vh]  ">
+      <div className=" scroll_parent_section_1 w-full  lg:h-[120vh]  ">
         <div className=" scroll_child_section_1 w-full h-full flex flex-col lg:flex-row bg-white p-5   lg:p-20 lg:py-32 ">
           <div className=" w-full  lg:w-[50%] h-full flex flex-col-reverse lg:flex-col items-center justify-evenly  lg:px-10 ">
             <div className="  m-10 lg:m-0  w-full ">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-                nemo ipsum quod iusto neque odio unde consectetur, corrupti
-                dolore eligendi ab, voluptates totam, tempora necessitatibus
-                illum impedit doloremque quam optio!
+                Diamond2®
+                operates at the intersection of fine jewellery and modern
+                science. Headquartered in Singapore, with sales and distribution
+                offices in the US, India and UAE, the company is the sole worldwide
+                manufacturer and distributor of Diamond2®
+                brand. <br /> <br />The Diamond2®
+                fine jewellery collection is designed and developed by
+                our in-house creative team based in Milan, Italy, the world’s design
+                capital.
               </p>
-              <div className="center mt-10 gap-4">
+              <div className="flex mt-10 gap-4">
                 <RiInstagramFill />
                 <RiFacebookBoxFill />
                 <RiTwitterFill />
               </div>
             </div>
+            <div className="">
 
-            <img
-              src="https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP"
-              alt=""
-            />
+              <img
+                className="w-[50%] mt-10"
+                src="/images/blogs/blog_cvr_1.png"
+                alt=""
+              />
+              <div className="flex mt-2 flex-col">
+
+                <p className="montserrat ">What is Diamond2 ? </p>
+                <p className="montserrat text-xs underline cursor-pointer opacity-60 hover:opacity-100 w-fit ">Read More</p>
+              </div>
+            </div>
           </div>
           <div className=" w-full lg:w-[50%] h-full  flex flex-col gap-10 items-center justify-center text-center">
-            <img
-              src="https://365ayearof.cartier.com/images/chapter-1/article-3/compressedImages/Article-Header-opt-300.WEBP"
-              alt=""
-            />
+            <div className="">
+
+              <img
+                className="w-[70%]"
+                src="/images/blogs/blog_cvr_2.png"
+                alt=""
+              /><div className="flex mt-2 items-start flex-col">
+
+                <p className="montserrat ">About Stones and Cuts </p>
+                <p className="montserrat text-xs underline cursor-pointer opacity-60 hover:opacity-100 w-fit ">Read More</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="scroll_parent_section_2 relative w-full h-[180vh] bg-white center">
-        <img className="w-full h-full object-cover " src="/images/store bg.jpeg" alt="" />
-        <div className="absolute right-5  ">
-          <p className="text-6xl">The Flagship Store</p>
+      <div className="scroll_parent_section_2 w-full h-[80vh] bg-transparent"></div>
+      <div className="scroll_parent_section_1 w-full  bg-white  p-5 py-20 ">
+        <p className="text-center text-6xl capitalize  ">The Diamond2 <span className="text-[#6d1d45]"> Stores</span></p>
+        <div className="w-full flex  flex-col md:flex-row my-20 ">
+          <div className=" w-full md:w-[50%] ">
+            <img className="h-full w-full object-cover" src="/images/stores/store_1.png" alt="" />
+          </div>
+          <div className=" w-full md:w-[50%] mt-5 md:mt-0 md:p-10 montserrat ">
+            <div className="flex w-full justify-evenly">
+              <div className="mb-6 h-[50%] w-[50%] ">
+                <h2 className="text-lg font-medium underline cursor-pointer uppercase text-[#6d1d45]">SINGAPORE Headquarters <br /> & Holding Co.</h2>
+                <p className="mt-2 font-medium">Diamond2®, Flagship Store</p>
+                <p className="text-gray-500 opacity-80">Wisma Atria</p>
+                <p className="mt-2 font-medium">Diamond2® Store</p>
+                <p className="text-gray-500 opacity-80">VivoCity</p>
+                <p className="mt-2 font-medium">Corporate Headquarters</p>
+                <p className="text-gray-500 opacity-80">Beach Road, Singapore</p>
+              </div>
 
+              <div className=" h-[50%] w-[50%]  ">
+                <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">INDIA</h2>
+                <p className="mt-2 font-medium">India HQ & Experience Center</p>
+                <p className="text-gray-500 opacity-80">Gurgaon, Haryana</p>
+                <p className="mt-2 font-medium">Registered Corporate Office</p>
+                <p className="text-gray-500 opacity-80">New Delhi</p>
+              </div>
+            </div>
+            <div className="flex w-full mt-5 justify-evenly">
+
+              <div className=" h-[50%] w-[50%]">
+                <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">USA</h2>
+                <p className="mt-2 font-medium">Corporate Office</p>
+                <p className="text-gray-500 opacity-80">New York, Manhattan</p>
+              </div>
+
+              <div className="h-[50%] w-[50%]">
+                <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">MIDDLE EAST</h2>
+                <p className="mt-2 font-medium">Fulfilment Center</p>
+                <p className="text-gray-500 opacity-80">Sharjah, U.A.E.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-
-
-      <div className="w-full  lg:h-[100vh] flex-col bg-white center">
-        <div className="w-full h-[75%]  grid  grid-cols-2 lg:grid-cols-5  ">
-          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-start">
-            <img src="https://365ayearof.cartier.com/images/chapter-6/article-5/compressedImages/Article-Header-opt-300.WEBP" alt="" />
-            <p className="   lg:font-medium  ">About img</p>
+      <div className="w-full ftr overflow-hidden md:h-[100vh] -mt-1  lg:h-[120vh] flex-col bg-white center">
+        <div className="w-full  overflow-hidden   lg:h-[80%]  xl:h-[60%] grid  grid-cols-2 lg:grid-cols-5  ">
+          <div className="h-full  my-14  lg:m-0 px-2 flex flex-col justify-start">
+            <div className=" h-[70vw]  md:h-[25vw]   w-full">
+              <img className="h-full w-full object-cover" src="/images/footer/img5_compressed.webp" alt="" />
+            </div>
+            <p className="   lg:font-medium montserrat uppercase  ">Wisma Atria Store</p>
           </div>
-          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-end">
-            <img src="https://365ayearof.cartier.com/images/chapter-6/article-7/compressedImages/Article-Header-opt-300.WEBP" alt="" />
-            <p className="   lg:font-medium  ">About img</p>
-          </div>
-          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-start">
-            <img src="https://365ayearof.cartier.com/images/chapter-6/article-5/compressedImages/Article-Header-opt-300.WEBP" alt="" />
-            <p className="   lg:font-medium  ">About img</p>
-          </div>
-          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-end">
-            <img src="https://365ayearof.cartier.com/images/chapter-6/article-7/compressedImages/Article-Header-opt-300.WEBP" alt="" />
-            <p className="   lg:font-medium  ">About img</p>
+          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col  justify-end  ftr_img ">
+            <div className=" h-[70vw]  md:h-[25vw]    w-full">
+              <img className="h-full w-full object-cover" src="/images/footer/img3_compressed.webp" alt="" />
+            </div>
+            <p className="   lg:font-medium montserrat uppercase  ">Diamond Cut Rings</p>
           </div>
           <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-start">
-            <img src="https://365ayearof.cartier.com/images/chapter-6/article-5/compressedImages/Article-Header-opt-300.WEBP" alt="" />
-            <p className="   lg:font-medium  ">About img</p>
+            <div className=" h-[70vw]  md:h-[25vw]   w-full">
+              <img className="h-full w-full object-cover" src="/images/footer/img4_compressed.webp" alt="" />
+            </div>
+            <p className="   lg:font-medium montserrat uppercase  ">High Jwellery Collection</p>
           </div>
-
+          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-end  ftr_img ">
+            <div className=" h-[70vw]  md:h-[25vw]   w-full">
+              <img className="h-full w-full object-cover" src="/images/footer/img2_compressed.webp" alt="" />
+            </div>
+            <p className="   lg:font-medium montserrat uppercase  ">Fine Jewellary Collection</p>
+          </div>
+          <div className="h-full  my-14 lg:m-0 px-2 flex flex-col justify-start">
+            <div className=" h-[70vw]  md:h-[25vw]   w-full">
+              <img className="h-full w-full object-cover" src="/images/footer/img1_compressed.webp" alt="" />
+            </div>
+            <p className="   lg:font-medium montserrat uppercase  ">Diamond2 Boxes</p>
+          </div>
         </div>
-        <div className="w-full h-[25%] font-semibold flex flex-col lg:flex-row items-end justify-between p-10">
-          <img className="lg:w-[10%]" src="/images/logo.png" alt="" />
-          <p className="w-full text-center lg:w-fit">Lorem ipsum dolor sit amet.</p>
+        <div className="w-full h-[25%]  montserrat flex flex-col lg:flex-row items-end justify-between p-10">
+          <img className=" md:w-[15%]" src="/images/logo_text_2.png" alt="" />
           <p className="  w-full my-5 lg:m-0 lg:w-fit   flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
             Back to top
             <RiArrowDropUpLine />
