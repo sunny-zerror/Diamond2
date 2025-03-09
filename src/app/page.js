@@ -1,5 +1,5 @@
 "use client";
-import React from "react"
+import React, { Suspense } from "react"
 import { gsap } from "gsap/dist/gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
@@ -13,6 +13,7 @@ import {
   RiTwitterFill,
 } from "@remixicon/react";
 import Headroom from "react-headroom";
+import Scene from "./components/Scene";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const hero_video = [
@@ -244,7 +245,7 @@ export default function Home() {
       ".ftr_img",
       { y: "-50%" },
       {
-        y: 0, 
+        y: 0,
         scrollTrigger: {
           trigger: ".ftr",
           // markers:true,
@@ -252,6 +253,24 @@ export default function Home() {
           end: "bottom bottom", // End later for a smoother transition
           scrub: true, // Slower reaction to scrolling
         },
+      }
+    );
+    gsap.fromTo(
+      ".hero_hd_1",
+      { y: 200 },
+      {
+        y: 0,
+        duration: 1,
+        delay: .5,
+      }
+    );
+    gsap.fromTo(
+      ".hero_hd_2",
+      { y: -200 },
+      {
+        y: 0,
+        duration: 1,
+        delay: .5,
       }
     );
 
@@ -275,7 +294,7 @@ export default function Home() {
 
   return (
     <div suppressHydrationWarning className=" spectral-regular">
-        <Headroom>
+      <Headroom>
         <div className="nav text-white p-5 w-full center z-[10]">
           <img className={`${logoWidth} cursor-pointer`} src={logoSrc} alt="Logo" />
         </div>
@@ -301,12 +320,12 @@ export default function Home() {
 
       <div className="w-full   uppercase spectral-extralight h-screen  lg:h-[70vh]  text-white py-20 md:py-0   flex flex-col  justify-end items-end md:px-[20vw] lg:px-[23vw] ">
         <div className="w-full text-4xl lg:text-8xl  overflow-hidden italic   ">
-          <p >
+          <p className="hero_hd_1" >
             Love more
           </p>
         </div>
         <div className="w-full flex  items-center justify-end text-4xl lg:text-8xl overflow-hidden">
-          <p >
+          <p className="hero_hd_2" >
             spend less
           </p>
         </div>
@@ -314,7 +333,11 @@ export default function Home() {
       <div className="  scroll_parent_section_1  w-full h-screen  lg:h-[130vh] ">
         <div className=" scroll_child_section_1 w-full h-full flex flex-col lg:flex-row bg-white    p-5 py-10 lg:p-20 ">
           <div className=" w-full lg:w-[50%] h-full center">
-            <div className=" w-full h-[50%]  md:w-[80%] md:h-[80%] bg-blue-100"></div>
+            <div className=" w-full h-[50%]  md:w-[80%] md:h-[80%] bg-blue-100">
+              <Suspense fallback={null}>
+              <Scene />
+              </Suspense>
+            </div>
           </div>
           <div className=" w-full h-[50%]   lg:w-[50%] spectral-light md:h-full  flex flex-col gap-10 items-center justify-center text-center">
             <p className="capitalize text-2xl md:text-4xl  ">
@@ -433,9 +456,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className=" scroll_parent_section_2 w-full h-[70vh] bg-transparent"></div>
+      <div className=" scroll_parent_section_2 w-full h-[50vh] bg-transparent"></div>
 
-      <div className=" scroll_parent_section_1 w-full  lg:h-[120vh]  ">
+      <div className=" scroll_parent_section_1 w-full  lg:h-[140vh]  ">
         <div className=" scroll_child_section_1 w-full h-full flex flex-col lg:flex-row bg-white p-5   lg:p-20 lg:py-32 ">
           <div className=" w-full  lg:w-[50%] h-full flex flex-col-reverse lg:flex-col items-center justify-evenly  lg:px-10 ">
             <div className="  m-10 lg:m-0  w-full ">
@@ -488,44 +511,48 @@ export default function Home() {
       </div>
 
       <div className="scroll_parent_section_2 w-full h-[80vh] bg-transparent"></div>
-      <div className="scroll_parent_section_1 w-full  bg-white  p-5 py-20 ">
-        <p className="text-center text-6xl capitalize  ">The Diamond2 <span className="text-[#6d1d45]"> Stores</span></p>
-        <div className="w-full flex  flex-col md:flex-row my-20 ">
-          <div className=" w-full md:w-[50%] ">
-            <img className="h-full w-full object-cover" src="/images/stores/store_1.png" alt="" />
-          </div>
-          <div className=" w-full md:w-[50%] mt-5 md:mt-0 md:p-10 montserrat ">
-            <div className="flex w-full justify-evenly">
-              <div className="mb-6 h-[50%] w-[50%] ">
-                <h2 className="text-lg font-medium underline cursor-pointer uppercase text-[#6d1d45]">SINGAPORE Headquarters <br /> & Holding Co.</h2>
-                <p className="mt-2 font-medium">Diamond2®, Flagship Store</p>
-                <p className="text-gray-500 opacity-80">Wisma Atria</p>
-                <p className="mt-2 font-medium">Diamond2® Store</p>
-                <p className="text-gray-500 opacity-80">VivoCity</p>
-                <p className="mt-2 font-medium">Corporate Headquarters</p>
-                <p className="text-gray-500 opacity-80">Beach Road, Singapore</p>
-              </div>
+      <div className=" w-full  bg-white  p-5 py-20 ">
+        <div className="">
 
-              <div className=" h-[50%] w-[50%]  ">
-                <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">INDIA</h2>
-                <p className="mt-2 font-medium">India HQ & Experience Center</p>
-                <p className="text-gray-500 opacity-80">Gurgaon, Haryana</p>
-                <p className="mt-2 font-medium">Registered Corporate Office</p>
-                <p className="text-gray-500 opacity-80">New Delhi</p>
-              </div>
+
+          <p className="text-center text-6xl capitalize  ">The Diamond2 <span className="text-[#6d1d45]"> Stores</span></p>
+          <div className="w-full flex  flex-col md:flex-row my-20 ">
+            <div className=" w-full md:w-[50%] ">
+              <img className="h-full w-full object-cover" src="/images/stores/store_1.png" alt="" />
             </div>
-            <div className="flex w-full mt-5 justify-evenly">
+            <div className=" w-full md:w-[50%] mt-5 md:mt-0 md:p-10 montserrat ">
+              <div className="flex w-full justify-evenly">
+                <div className="mb-6 h-[50%] w-[50%] ">
+                  <h2 className="text-lg font-medium underline cursor-pointer uppercase text-[#6d1d45]">SINGAPORE Headquarters <br /> & Holding Co.</h2>
+                  <p className="mt-2 font-medium">Diamond2®, Flagship Store</p>
+                  <p className="text-gray-500 opacity-80">Wisma Atria</p>
+                  <p className="mt-2 font-medium">Diamond2® Store</p>
+                  <p className="text-gray-500 opacity-80">VivoCity</p>
+                  <p className="mt-2 font-medium">Corporate Headquarters</p>
+                  <p className="text-gray-500 opacity-80">Beach Road, Singapore</p>
+                </div>
 
-              <div className=" h-[50%] w-[50%]">
-                <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">USA</h2>
-                <p className="mt-2 font-medium">Corporate Office</p>
-                <p className="text-gray-500 opacity-80">New York, Manhattan</p>
+                <div className=" h-[50%] w-[50%]  ">
+                  <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">INDIA</h2>
+                  <p className="mt-2 font-medium">India HQ & Experience Center</p>
+                  <p className="text-gray-500 opacity-80">Gurgaon, Haryana</p>
+                  <p className="mt-2 font-medium">Registered Corporate Office</p>
+                  <p className="text-gray-500 opacity-80">New Delhi</p>
+                </div>
               </div>
+              <div className="flex w-full mt-5 justify-evenly">
 
-              <div className="h-[50%] w-[50%]">
-                <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">MIDDLE EAST</h2>
-                <p className="mt-2 font-medium">Fulfilment Center</p>
-                <p className="text-gray-500 opacity-80">Sharjah, U.A.E.</p>
+                <div className=" h-[50%] w-[50%]">
+                  <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">USA</h2>
+                  <p className="mt-2 font-medium">Corporate Office</p>
+                  <p className="text-gray-500 opacity-80">New York, Manhattan</p>
+                </div>
+
+                <div className="h-[50%] w-[50%]">
+                  <h2 className="text-lg underline font-medium cursor-pointer text-[#6d1d45]">MIDDLE EAST</h2>
+                  <p className="mt-2 font-medium">Fulfilment Center</p>
+                  <p className="text-gray-500 opacity-80">Sharjah, U.A.E.</p>
+                </div>
               </div>
             </div>
           </div>
