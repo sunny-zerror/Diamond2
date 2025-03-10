@@ -7,15 +7,15 @@ const Page = () => {
 
     return (
         <div>
-        <div className="center w-full p-5 spectral-regular">
+        <div className="center w-full p-5 montserrat">
   
           <Link className='w-full h-full flex' href="/" >
-            <p className='flex items-center gap-2 text-lg md:text-2xl'> <RiArrowLeftLine />  Back</p>
+            <p className='flex items-center gap-2 text-lg  font-medium'> <RiArrowLeftLine />  Back</p>
           </Link>
         </div>
         <div className="w-full   flex flex-col text-center items-center  spectral-regular ">
           <div className="center flex-col gap-10 w-full py-10">
-            <p className=' text-3xl md:text-5xl'>What is
+            <p className=' text-3xl md:text-5xl text-[#6d1d45] '>What is
               DIAMOND2 <sup>®</sup> ?</p>
           </div>
   
@@ -44,7 +44,7 @@ const Page = () => {
               capital.</p> <br /><br />
           </div>
           <div className="center flex-col gap-10  w-full pb-10">
-            <p className='text-3xl md:text-5xl'>Why
+            <p className='text-3xl md:text-5xl text-[#6d1d45]'>Why
               DIAMOND2 <sup>®</sup> ?</p>
           </div>
           <img src="/images/blogs/blog_cvr_2.webp" alt="" />
